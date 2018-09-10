@@ -14,14 +14,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  				.and().withUser("admin").password("p").roles("ADMIN", "USER");
  	}
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests().anyRequest().authenticated()
-			.and().formLogin()
-			.and().httpBasic();
-	}
-	
-	
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+        .authorizeRequests()
+            .anyRequest().authenticated()
+            .and()
+            .csrf().disable()
+        .formLogin().and()
+        .logout().and()
+        .httpBasic();
+    }
 
+	
 }
